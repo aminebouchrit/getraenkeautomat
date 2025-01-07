@@ -1,0 +1,21 @@
+
+<p class="bcar-padding"></p>
+<div class="text-center container py-5">
+  <br>
+  <h4 class="mt-4 mb-5"><strong>Login</strong></h4>
+  <div class="text-left">
+    <div *ngIf="error" class="alert alert-danger">Invalid username or password</div>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>User ID</label>
+        <input type="text" class="form-control" [(ngModel)]="username" name="username" required>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-control" [(ngModel)]="password" name="password" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+
+  </div>
+</div>

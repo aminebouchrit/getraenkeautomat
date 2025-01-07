@@ -1,0 +1,115 @@
+<div class="card" style="margin-top: 150px" >
+       <!-- cart  -->
+      <div class="col-md-8 cart">
+        <div class="title">
+          <div class="row">
+            <div class="col"><h4><b>thank you! enjoy your drink.</b></h4></div>
+          </div>
+          <span class="order">#{{oderNr}}</span>
+          <div class="detail text-center">
+            <span class="d-block summery">Your order will be made ready for delivery.</span>
+          </div>
+          <br>
+          <div class="detail text-center">
+            <img src="/assets/img/check-circle.svg" alt="Bootstrap" width="52" height="42"></div>
+        </div>
+
+      </div>
+  <!--mix-->
+      <div class="container mt-5">
+        <div class="d-flex justify-content-center row" >
+          <div class="col-md-10">
+            <div class="rounded">
+              <div class="table-responsive table-borderless">
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th class="text-center">
+                        <div class="inner-circle"></div>
+                    </th>
+                    <th>Position</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Volume</th>
+                    <th>Ingredients</th>
+                    <th>Date</th>
+                    <!--
+                    <th>Rating</th>
+                    -->
+                    <th></th>
+                  </tr>
+                  </thead>
+                  <tbody class="table-body" *ngFor="let shoppingCartEntry of shoppingCart; let i = index;">
+                  <tr class="cell-1" *ngIf="shoppingCartEntry.drink.recipeID else mixDrink">
+                    <td class="text-center">
+                        <div class="inner-circle"></div>
+                    </td>
+
+                      <td>{{i}}</td>
+                      <td>{{getDrinkName(shoppingCartEntry.drink.recipeID)}}</td>
+                      <td>{{shoppingCartEntry.drink.price.toFixed(2)}}€</td>
+                      <td>{{getTotalVolume(shoppingCartEntry)}}ml</td>
+                      <td>
+                        <div *ngFor="let item of shoppingCartEntry.drink.items">
+                          <label>{{getCategoryName(item.categoryID)}} </label> <br>
+                        </div>
+                      </td>
+
+                    <td> {{currentDate}}</td>
+
+                <!--    <td>
+                      <a class="section2_btn btn66" type="button" routerLink="/rating" >
+                        <img src="/assets/img/star.svg" alt="Bootstrap" height="23px" >
+                      </a></td>-->
+                  </tr>
+
+                  <ng-template #mixDrink>
+                    <td class="text-center">
+                      <div class="inner-circle"></div>
+                  </td>
+                    <td>{{i}}</td>
+                    <td>{{shoppingCartEntry.drink.mixName}}</td>
+                    <td>{{getTotalPrice(shoppingCartEntry).toFixed(2)}}€</td>
+                    <td>{{getTotalVolume(shoppingCartEntry)}}ml</td>
+                    <td>
+                      <div *ngFor="let ingredient of shoppingCartEntry.drink.ingredients">
+                        <label>{{ingredient.name}} </label> <br>
+                      </div>
+                    </td>
+
+                  <td> {{currentDate}}</td>
+
+                  </ng-template>
+
+                  <tr class="cell-1">
+                    <td class="text-center">
+                      <div class="toggle-btn">
+                        <div class="inner-circle"></div>
+                      </div>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="into-shopping" >
+          <button class="btn btn-secondary" (click)="goToHome()">Go back to shopping &rightarrow;</button>
+          <br>
+          <br>
+        </div>
+
+        <div class="into-rating" >
+
+          <button class="btn btn-secondary" routerLink="/rating">&leftarrow; Go to rating</button>
+
+          <br>
+        </div>
+      </div>
+
+      <br>
+    </div>
+
+
+

@@ -1,0 +1,55 @@
+# start containers with: docker compose -f "04_Docker\docker-compose.yml" up --build
+
+version: '3.7'
+
+services:
+  # database container
+  db:
+    image: mariadb:latest
+    container_name: drinkMachine_db
+    volumes:
+      - ../02_Database/sql:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: geheim
+      MYSQL_DATABASE: drink_machine
+    networks:
+      - mariadb-phpmyadmin-python
+
+  # phpmyadmin container
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: drinkMachine_myAdmin
+    # wait for the database to start
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: geheim
+    networks:
+      - mariadb-phpmyadmin-python
+
+  # python container
+  python:
+    container_name: drinkMachine_python
+    build: .
+    # wait for the other services to start
+    depends_on:
+      - db
+      - phpmyadmin
+    volumes:
+      - ../03_Backend/Python_Backend:/app
+    # run python unbuffered so that the container log is updated immediately
+    command: python -u /app/python_backend.py
+    networks:
+      - mariadb-phpmyadmin-python
+
+networks:
+  mariadb-phpmyadmin-python:
+
+volumes:
+  sql:
+  app:

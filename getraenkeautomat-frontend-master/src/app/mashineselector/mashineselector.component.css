@@ -1,0 +1,52 @@
+body{
+  background-color: #eee;
+}
+
+.card{
+  margin: auto;
+  max-width: 950px;
+  width: 70%;
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 1rem;
+  border: transparent;
+}
+@media(max-width:767px){
+  .card{
+    margin: 3vh auto;
+  }
+}
+
+.row{
+  margin: 0;
+}
+img{
+  width: 3.5rem;
+}
+
+h5{
+  margin-top: 4vh;
+}
+hr{
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 768px){
+  .col-md-8 {
+    flex: 0 0 66.666667%;
+    max-width: 100%;
+  }
+}
+
+.main-menu{
+  float: right !important;
+  margin-bottom: 30px;
+}
+
+
+.card{
+  min-width: 350px;
+}
+
+.col {
+  margin-top: 10px;
+}

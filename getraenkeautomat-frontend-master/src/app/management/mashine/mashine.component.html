@@ -1,0 +1,47 @@
+
+<br>
+<br>
+    
+<div class="container-fluid">
+
+  <br>
+  <br>
+
+    
+        <div class="row">
+          <div class="col-md-4">
+            <h3>Machines</h3>
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let item of machines; let i = index;" [class.active]="i == selectedMachineIndex">
+    
+                <a (click)="selectMachine(i)">{{item.machineID}} : {{item.name}}</a>
+                <button class="btn btn-sm btn-danger float-right" (click)="deleteMachine(i)"><i class="fa fa-trash"></i></button>
+              
+              </li>
+             
+            </ul>
+          </div>
+          <div class="col-md-8">
+            <h3>Details</h3>
+            <form #bottleForm="ngForm" (ngSubmit)="saveChanges()">
+              <div class="form-group" *ngFor="let item of machines[selectedMachineIndex] | keyvalue: originalOrder; let i=index; trackBy:trackByFn">
+                <label for="id">{{ item.key }}</label>
+                <div *ngIf="isArray(machines[selectedMachineIndex][item.key]); else elseBlock">
+                    <div class="form-group" *ngFor="let subItem of machines[selectedMachineIndex][item.key] | keyvalue: originalOrder; let i=index; trackBy:trackByFn">
+                        <label for="id">{{ subItem.key }}</label>
+                        <input type="text" class="form-control" name='{{subItem.key}}' [(ngModel)]="machines[selectedMachineIndex][item.key][subItem.key]"> 
+                    </div>
+                </div>
+                <ng-template #elseBlock>
+                    <input type="text" class="form-control" name='{{item.key}}' [(ngModel)]="machines[selectedMachineIndex][item.key]"> 
+                </ng-template>
+              </div>
+              
+              
+              <!-- <button type="button" class="btn btn-secondary" (click)="revertChanges()">Revert</button> -->
+              <button type="submit" class="btn btn-primary" [disabled]="!bottleForm.valid">Apply</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      

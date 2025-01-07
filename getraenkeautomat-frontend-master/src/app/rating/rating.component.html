@@ -1,0 +1,67 @@
+
+<div class="card" style="margin-top: 150px">
+  <!-- cart -->
+  <div class="col-md-8 cart">
+    <div class="title">
+      <div class="row">
+        <div class="col"><h4><b>Rate your order!</b></h4></div>
+      </div>
+      <span class="order">Order - 4554645</span>
+      <div class="detail text-center">
+      </div>
+      <br>
+
+    </div>
+    <div class="row">
+      <!--drink-->
+      <div class="col-lg-4 col-md-6 mb-4" *ngFor="let i of rateDrinks ; let y = index;">
+
+          <div *ngIf="i.drink.recipeID" class="card-1 text-center">
+            <hr/>
+            <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light" style="margin-top: 10px">
+              <!--drink img-->
+              <img src="{{i.drink.pic_url}}" class="w-100" style="margin-top: 10px;" />
+
+            </div>
+
+              <a   class="text-reset">
+                <h5 class="card-title mb-3">{{i.drink.name}}</h5>
+              </a>
+
+
+              <div class="rating">
+                <input type="radio"  name="rating" value="5" id="5"><label (click)="getRating(i.drink.recipeID,5)" for="5">☆</label>
+                <input type="radio"  name="rating" value="4" id="4"><label (click)="getRating(i.drink.recipeID,4)" for="4">☆</label>
+                <input type="radio"  name="rating" value="3" id="3"><label (click)="getRating(i.drink.recipeID,3)" for="3">☆</label>
+                <input type="radio"  name="rating" value="2" id="2"><label (click)="getRating(i.drink.recipeID,2)" for="2">☆</label>
+                <input type="radio"  name="rating" value="1" id="1"><label (click)="getRating(i.drink.recipeID,1)" for="1">☆</label>
+              </div>
+
+              <!--Submit button -->
+              <div class="buttons px-4 mt-0">
+                <button (click)="submitRating()" class="btn btn-warning btn-block rating-submit">Submit</button>
+              </div>
+
+
+            </div>
+            </div>
+          </div>
+
+
+        </div>
+
+    <div class="container mt-5">
+
+      <div class="into-shopping" >
+        <button class="btn btn-secondary" routerLink="">Go back to shopping &rightarrow;</button>
+
+        <br>
+      </div>
+
+    </div>
+      </div>
+
+
+
+    <br>
+

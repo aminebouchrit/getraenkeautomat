@@ -1,0 +1,13 @@
+# Visual Studio Code
+.vscode/settings.json
+.vscode/c_cpp_properties.json
+
+# Python
+*.pyc
+
+# draw.io
+*.dtmp
+*.drawio.bkp
+
+# platform.io
+01_Arduino_MQTT/.pio/

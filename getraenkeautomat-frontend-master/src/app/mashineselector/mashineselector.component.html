@@ -1,0 +1,28 @@
+
+
+<div class="card" style="margin-top: 150px">
+  <div class="col-md-8 cart">
+
+      <div class="row">
+        <div class="col"><h4> All Machines</h4></div>
+      </div>
+      <div class="card-body text-center" *ngFor="let machine of machines">
+        <a (click)="selectMachine(machine.machineID)">
+          <h5 class="card-title mb-3">{{machine.name}}</h5>
+        </a>
+        <a><img src="./assets/img/drink-machine.png">
+
+        </a>
+      </div>
+
+      <div class="main-menu" >
+        <br>
+        <button class="btn btn-link" (click)="startDebugMode()">
+        <span class="text-muted">Debug Mode &rightarrow;</span>
+      </button>
+
+      </div>
+
+    <br>
+  </div>
+</div>

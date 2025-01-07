@@ -1,0 +1,90 @@
+<section style="background-color: #eee;">
+
+  <div class="text-center container py-5">
+    <br>
+    <h4 class="mt-4 mb-5"><strong>Mix it up</strong></h4>
+
+    <div class="text-center container py-3" style="width: 40%">
+    <!--Select drink-->
+    <div id="categorie-btn text-center">
+      <div class="navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>Select drink
+        </button>
+
+      </div>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav nav-justified w-100 text-center ">
+          <li class="nav-item active" *ngFor="let bottle of bottles">
+            <a class="nav-link"
+               [ngClass]="{'selected-link': bottle.bottleID == selectedBottleID}"
+               style="cursor: pointer"
+               (click)="selectBottle(bottle.name, bottle.price, bottle.bottleID)">
+              {{bottle.name}}
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+      <p></p>
+    <!---range-->
+    <div class="">
+          <label>Select volume</label>
+          <ngx-slider [(value)]="volumeSlider.value" [options]="volumeSlider.options"></ngx-slider>
+          <button type="submit" class="btn btn-primary" (click)="addIngredient()">+</button>
+    </div>
+    </div>
+
+<!--table-->
+    <table   class="table table-striped text-center" id="myTable">
+      <thead>
+        <tr class="thead-dark">
+          <th scope="col">Drink</th>
+          <th scope="col">volume</th>
+          <th scope="col">price</th>
+          <th scope="col">action</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ingredient of ingredients">
+          <th scope="row">{{ingredient.name}}</th>
+          <td> {{ingredient.amount_ml}}</td>
+          <td>{{ingredient.price.toFixed(2)}}</td>
+          <td  class="text-center" style="text-align: center">
+            <span  class="close" style="cursor: pointer;" (click)="deleteIngredient(ingredient)">&#10005;</span>
+           </td>
+        </tr>
+        <tr style="background-color: #454d55; color: white">
+          <td></td>
+          <td>total volume: {{getTotalVolume()}}</td>
+          <td>total price: {{getTotalPrice().toFixed(2)}}</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+    <form>
+       <!--recipeNameInput-->
+    <input #recipeNameInput   type="text" required class="form-control" [(ngModel)]="mixName" placeholder="Mix Name" aria-label="recipe" aria-describedby="basic-addon1" >
+    <hr>
+    <!-- addToCart-->
+      <button type="submit" class="btn btn-primary" (click)="addToCart()" >add to Cart</button>
+    </form>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

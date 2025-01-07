@@ -1,0 +1,35 @@
+image: python:3-stretch
+
+# only run pipeline for merge requests
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+
+# cache python packages
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+cache:
+  paths:
+    - .cache/pip
+    - venv/
+
+# install necessary python packages
+# (additional libraries can be added here)
+before_script:
+  - pip install virtualenv
+  - virtualenv venv
+  - source venv/bin/activate
+  - pip install jsonschema
+  - pip install sqlalchemy
+
+# run unit tests for the python bridge and backend
+test:
+  # use python gitlab runner
+  tags:
+    - python
+    - python3
+  # run all tests located in the two test folders
+  script:
+    - python -m unittest discover -v -t 01_Arduino_MQTT/Python_Bridge -s tests
+    - python -m unittest discover -v -t 03_Backend/Python_Backend -s tests

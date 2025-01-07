@@ -1,0 +1,74 @@
+
+<div class="card" style="margin-top: 150px"  *ngFor="let i of drinkInfo">
+  <!-- cart -->
+  <div class="col-md-8 cart">
+    <div class="title">
+      <div class="row">
+        <div class="col"><h4>     <b> {{i.drink.name}}</b></h4></div>
+      </div>
+      <span class="order"> </span>
+      <!-- info -->
+      <table class="table">
+        <thead>
+        <tr>
+          <th class="text-center">
+            <div class="inner-circle"></div>
+          </th>
+          <th></th>
+          <th>name</th>
+          <th>price</th>
+          <th>ingredients</th>
+          <th></th>
+
+          <th></th>
+        </tr>
+        </thead>
+        <tbody class="table-body">
+        <tr class="cell-1">
+          <td class="text-center">
+            <div class="inner-circle"></div>
+          </td>
+          <th> <img src="{{i.drink.pic_url}}"> </th>
+          <td> {{i.drink.name}}</td>
+          <td>{{i.drink.price}} </td>
+          <td> {{i.drink.ingredients}}</td>
+          <td> </td>
+
+
+
+        <tr class="cell-1">
+          <td class="text-center">
+            <div class="toggle-btn">
+              <div class="inner-circle"></div>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <!-- info -->
+      <br>
+
+
+  </div>
+
+  <div class="container mt-5">
+    <div class="d-flex justify-content-center row">
+      <div class="col-md-10">
+        <div class="rounded">
+          <div class="table-responsive table-borderless">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="into-shopping" >
+      <span class="text-muted">Back to Startscreen</span>
+      <a routerLink="">&rightarrow;</a>
+      <br>
+    </div>
+
+  </div>
+  <br>
+</div>
+</div>

@@ -1,0 +1,68 @@
+#logo{
+  padding-left: 30px;
+}
+#Button-cart{
+  padding-right: 20px;
+}
+.cart-logo{
+  width: 50px;
+  height: 50px;
+}
+.manager-icon
+{
+  width: 50px;
+  height: 50px;
+  margin-right: 1rem;
+}
+.navbar-title {
+  font-size: 30px;
+}
+
+h1{
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 20px;
+}
+
+body {
+  background: black;
+}
+
+.cart {
+  position: relative;
+  display: block;
+  width: 28px;
+  height: 28px;
+  height: auto;
+  overflow: hidden;
+}
+.material-icons {
+  position: relative;
+  top: 4px;
+  z-index: 1;
+  font-size: 24px;
+  color: white;
+}
+.count {
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  z-index: 2;
+  font-size: 11px;
+  border-radius: 50%;
+  background: #d60b28;
+  width: 16px;
+  height: 16px;
+  line-height:16px;
+  display: block;
+  text-align: center;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+}
+.shopping_cart_icon{
+  position: absolute;
+  top: 20px;
+  right: 55px;
+}
+
+

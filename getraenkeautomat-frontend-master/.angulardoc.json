@@ -1,0 +1,14 @@
+{
+  "repoId": "09275f40-52b2-48aa-b3e1-41ec8b5777d6",
+  "lastSync": 0,
+  "styles": [
+    "src/styles.css",
+    "./node_modules/bootstrap/dist/css/bootstrap.min.css"
+  ],
+  "scripts": [
+    "./node_modules/jquery/dist/jquery.min.js",
+    "./node_modules/popper.js/dist/umd/popper.min.js",
+    "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+  ]
+}
+

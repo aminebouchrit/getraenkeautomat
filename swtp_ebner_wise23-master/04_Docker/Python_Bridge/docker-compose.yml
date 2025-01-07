@@ -1,0 +1,22 @@
+# start container with: docker compose -f "04_Docker\Python_Bridge\docker-compose.yml" up --build
+
+version: '3.7'
+
+services:
+  # python container
+  python:
+    container_name: drinkMachine_bridge
+    build: .
+    # allow the container to access the serial port that the arduino is connected to
+    # (you may need to adjust the mapping if your device name is different)
+    # if you are using docker on windows using WSL2, a workaround is necessary to access the serial port
+    # from within the container: https://learn.microsoft.com/en-us/windows/wsl/connect-usb
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
+    volumes:
+      - ../../01_Arduino_MQTT/Python_Bridge:/bridge
+    # run python unbuffered so that the container log is updated immediately
+    command: python -u /bridge/python_bridge.py
+
+volumes:
+  bridge:

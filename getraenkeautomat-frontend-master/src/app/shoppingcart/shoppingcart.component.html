@@ -1,0 +1,80 @@
+
+
+ <div class="card" style="margin-top: 150px">
+     <!-- cart -->
+    <div class="col-md-8 cart">
+      <div class="title">
+        <div class="row">
+          <div class="col"><h4><b>Shopping Cart</b></h4></div>
+        </div>
+      </div>
+      <!-- drinks row -->
+      <!--simple-->
+
+      <div class="row border-top border-bottom" *ngFor="let shoppingCartEntry of shoppingCart; let i = index;">
+        <div class="row main align-items-center">
+          <div *ngIf="shoppingCartEntry.drink.recipeID; then simpleDrink else mixIt"></div>
+          <ng-template #simpleDrink>
+          <div class="col-2"><img class="img-fluid" src="{{shoppingCartEntry.drink.pic_url}}"></div>
+          <div class="col">
+            <div class="row text-muted">{{shoppingCartEntry.drink.name}}</div>
+            <div class="row">{{shoppingCartEntry.drink.category}}</div>
+          </div>
+
+          <div class="col">
+            <button class="btn btn-secondary" (click)="decreaseItemQuantity(shoppingCartEntry)">-</button>
+              <a class="border">{{shoppingCartEntry.quantity}}</a>
+              <button class="btn btn-secondary" (click)="increaseItemQuantity(shoppingCartEntry)" >+</button>
+          </div>
+
+          <div class="col">{{(shoppingCartEntry.drink.price.toFixed(2) )}} &euro;
+            <span  class="close" (click)="singleDelete(i)">&#10005;</span>
+          </div>
+        </ng-template>
+<!--mix-->
+        <ng-template #mixIt>
+            <div class="col-2"><img class="img-fluid" src="./assets/img/drink_mix_it.png"></div>
+            <div class="col">
+              <div class="row text-muted">{{shoppingCartEntry.drink.mixName}}</div>
+              <div class="row" *ngFor="let ingredient of shoppingCartEntry.drink.ingredients">{{ingredient.name}}</div>
+              <div class="row"> {{getMixVolume(shoppingCartEntry.drink.ingredients) }} ml</div>
+            </div>
+
+            <div class="col">
+              <button class="btn btn-secondary" (click)="decreaseItemQuantity(shoppingCartEntry)">-</button>
+                <a class="border">{{shoppingCartEntry.quantity}}</a>
+                <button class="btn btn-secondary" (click)="increaseItemQuantity(shoppingCartEntry)" >+</button>
+            </div>
+
+            <div class="col">{{getMixPrice(shoppingCartEntry.drink.ingredients).toFixed(2)}} &euro;
+              <span  class="close" (click)="singleDelete(i)">&#10005;</span>
+            </div>
+
+          </ng-template>
+          
+        </div>
+        
+      </div>
+      <div class="row a" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+        <div class="col">TOTAL PRICE</div>
+        <div class="col text-right">{{getTotalPrice().toFixed(2)}}&euro;</div>
+      </div>
+      <!-- Back to shop -->
+      <br>
+      
+      <div class="button-container">
+
+        <div class="back-to-shop">
+          <button class="btn btn-secondary" routerLink="">&leftarrow; Back to shop</button>
+
+        </div>
+
+        <div class="into-rating" >
+          <button class="btn btn-secondary" (click)="toOrder()" routerLink="/order">Order now &rightarrow;</button>
+
+        </div>
+      </div>
+    </div>
+
+</div>
+

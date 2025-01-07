@@ -1,0 +1,40 @@
+
+<br>
+<br>
+<div class="container-fluid">
+
+<br>
+<br>
+
+
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Bottles</h3>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let item of bottles; let i = index;" [class.active]="i == selectedBottleIndex">
+
+            <a (click)="selectBottle(i)">{{item.bottleID}} : {{item.name}}</a>
+            <button class="btn btn-sm btn-danger float-right" (click)="deleteBottle(i)"><i class="fa fa-trash"></i></button>
+          
+          </li>
+          <li class="list-group-item">
+            <button class="btn btn-primary" (click)="createNewBottle()">New Bottle</button>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-8">
+        <h3>Details</h3>
+        <form #bottleForm="ngForm" (ngSubmit)="saveChanges()">
+          <div class="form-group" *ngFor="let item of bottles[selectedBottleIndex] | keyvalue: originalOrder; let i=index; trackBy:trackByFn">
+            <label for="id">{{ item.key }}</label>
+            <input type="{{getType(bottles[selectedBottleIndex][item.key])}}" class="form-control" name='{{item.key}}' [(ngModel)]="bottles[selectedBottleIndex][item.key]"> 
+          </div>
+          
+          
+          <!-- <button type="button" class="btn btn-secondary" (click)="revertChanges()">Revert</button> -->
+          <button type="submit" class="btn btn-primary" [disabled]="!bottleForm.valid">Apply</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

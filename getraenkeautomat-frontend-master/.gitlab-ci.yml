@@ -1,0 +1,18 @@
+image: node:latest
+
+cache:
+  paths:
+    - node_modules/
+
+stages:
+  - build
+
+build-frontend:
+  stage: build
+  only:
+    - staging
+  before_script:
+    - 'npm install'
+    - 'npm ci'
+  script:
+    - 'npm run build'

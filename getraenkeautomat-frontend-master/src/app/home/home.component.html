@@ -1,0 +1,161 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<section style="background-color: #eee;">
+
+  <!-- Sidebar Category -->
+  <header>
+    <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+     <a class=""> <h5>Category</h5></a>
+      <div class="position-sticky" style="overflow:scroll; height:400px;" >
+        <a class="nav-link text-center category"
+           *ngFor="let cat of subLayerCategoryList"
+           (click)="selectedCategoryId = cat.categoryID; hasRecieveBeenCalled = false; requestProduceableDrinks(cat.categoryID)"
+           [ngClass]="{'selected': selectedCategoryId === cat.categoryID}">
+          {{cat.name}}
+          <span class="sr-only" >(current)</span>
+        </a>
+
+      </div>
+    </nav>
+  </header>
+  <main>
+
+    <div class="text-center container py-5">
+      <!-- Filter-->
+      <div class="">
+        <br>
+        <h4 class="mt-4 mb-5"><strong>Bestsellers</strong></h4>
+        <div class="row">
+          <div class="col-md-3 offset-md-3"> </div>
+          <div class="col-md-6 offset-md-3 text-center" >
+            <div id="categorie-btn1">
+              <div class="navbar-light bg-light">Filter
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              </div>
+              <div class="collapse navbar-collapse" class="navbarNav">
+                <ul class="navbar-nav nav-justified">
+
+                  Alcohol?<li class="form-check form-check-inline">
+                  <div class="form-check form-check-inline text-center">
+                    <input class="form-check-input" type="checkbox" (change)="onAlcoholYesCheckboxChange($event)" value=""  id="flexCheckDefault1" >
+                    <label class="form-check-label" for="flexCheckDefault1">
+                      Yes
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" (change)="onAlcoholNoCheckboxChange($event)" value="" id="flexCheckDefault3">
+                    <label class="form-check-label" for="flexCheckDefault3">
+                      No
+                    </label>
+                  </div>
+                </li>
+                  <br>
+                  <div class="">
+                    <label>Price in €</label>
+                    <ngx-slider [(value)]="priceSlider.minValue" [(highValue)]="priceSlider.maxValue"[options]="priceSlider.options" ></ngx-slider>
+
+                  </div>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 offset-md-3"> </div>
+        </div>
+      </div>
+
+      <!--drinks-->
+      <div class="row">
+        <!--drink-->
+        <div class="col-lg-4 col-md-6 mb-4 text-center" *ngFor="let drink of drinkList">
+          <!-- <div class="card border" *ngIf="(containsAlcohol==0 || containsAlcohol == 1 && drink.includeAlc == true || containsAlcohol == 2 && drink.includeAlc == false)&&
+                                          drink.price >= priceSlider.minValue && drink.price <= priceSlider.maxValue">  Doesnt work anymore because of changed recieving data package from backend -->
+          <div class="card border" *ngIf="
+                                          drink.price >= priceSlider.minValue && drink.price <= priceSlider.maxValue">
+            <div class="card">
+              <!--rating-->
+              <div class="rating text-center">
+                <div *ngFor="let item of [].constructor(5); let i=index;">
+                  <div *ngIf="drink.rating_value-i > 0.66">
+                    <mat-icon style="color: #F9A602">star</mat-icon>
+                  </div>
+                  <div *ngIf="drink.rating_value-i >= 0.33 && drink.rating_value-i <= 0.66">
+                    <mat-icon style="color: #F9A602">star_half</mat-icon>
+                  </div>
+                </div>
+                <div class="rating-number">
+                  <div *ngIf="drink.rating_number == 0; else hasRating">
+                    <label style="color: #0a4275">No Rating</label>
+                  </div>
+                  <ng-template #hasRating>
+                    <label style="color: #0a4275">({{drink.rating_number }})</label>
+                  </ng-template>
+                </div>
+              </div>
+              <hr/>
+              <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light" style="margin-top: 15px">
+                <!--drink img-->
+                <img src="{{drink.pic_url}}" class="w-100" style="margin-top: 20px;" />
+
+                <a href="#!">
+                  <div class="mask">
+                    <div class="d-flex justify-content-start align-items-end h-100"></div>
+                  </div>
+                  <div class="hover-overlay">
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                  </div>
+                </a>
+
+                <!--drink content-->
+                <div class="card-body">
+                  <a   class="text-reset">
+                    <h5 class="card-title mb-3">{{drink.name}}</h5>
+                  </a>
+                  <a  class="text-reset">
+                    <p>{{getCategoryName(drink.categoryID)}}</p>
+                  </a>
+                  <h6 class="mb-3">{{drink.price.toFixed(2)}} €</h6>
+
+
+                  <div class="content">
+                    <!-- drink action-->
+
+
+                    <div class="content">
+                      <!-- drink action-->
+                      <div class="d-flex flex-row">
+                        <a  type="button" class="btn btn-primary flex-fill me-1" data-mdb-ripple-color="dark"(click)="openDrinkInformation(drink)" routerLink="information">
+                          <i class="fa-sharp fa-solid fa-circle-info"> </i>
+                        </a>
+
+
+                        <span style="width: 100px">  </span>
+                        <button type="button" class="btn btn-danger flex-fill ms-1" (click)="addItemToCart(drink)">
+                          <i class="fa-solid fa-cart-plus"></i>
+                        </button>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <br>
+  <app-footer></app-footer>
+</section>
+
+
+
+
+

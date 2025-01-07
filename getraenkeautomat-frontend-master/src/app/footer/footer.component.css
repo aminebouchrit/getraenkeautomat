@@ -1,0 +1,17 @@
+
+.text-center { font-size: 18px;}
+.btn-lg{    border-radius: 2.3rem !important; width: 50% !important;}
+.footer{ background: #d60b28;}
+
+.footer{
+  position: fixed;
+
+}
+
+.btn-lg{
+  border-radius: 2.3rem !important;
+  width: 50% !important;
+  margin-top:10px;
+
+}
+

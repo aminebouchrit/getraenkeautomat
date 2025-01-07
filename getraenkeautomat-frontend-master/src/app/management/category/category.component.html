@@ -1,0 +1,41 @@
+<br>
+<br>
+<div class="container-fluid">
+
+  <br>
+  <br>
+    
+    
+        <div class="row">
+          <div class="col-md-4">
+            <h3>Categories</h3>
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let item of categories; let i = index;" [class.active]="i == selectedCategoryIndex">
+    
+                <a (click)="selectCategory(i)">{{item.categoryID}} : {{item.name}}</a>
+                <button class="btn btn-sm btn-danger float-right" (click)="deleteCategory(i)"><i class="fa fa-trash"></i></button>
+              
+              </li>
+              <li class="list-group-item">
+                <button class="btn btn-primary" (click)="createNewCategory()">New Category</button>
+                &nbsp;
+                <button class="btn btn-primary" (click)="createNewRecipe()">New Recipe</button>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-8">
+            <h3>Details</h3>
+            <form #bottleForm="ngForm" (ngSubmit)="saveChanges()">
+              <div class="form-group" *ngFor="let item of categories[selectedCategoryIndex] | keyvalue: originalOrder; let i=index; trackBy:trackByFn">
+                <label for="id">{{ item.key }}</label>
+                <input type="text" class="form-control" name='{{item.key}}' [(ngModel)]="categories[selectedCategoryIndex][item.key]"> 
+              </div>
+              
+              
+              <!-- <button type="button" class="btn btn-secondary" (click)="revertChanges()">Revert</button> -->
+              <button type="submit" class="btn btn-primary" [disabled]="!bottleForm.valid">Apply</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      

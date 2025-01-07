@@ -1,0 +1,21 @@
+<nav class="navbar navbar-light bg-light fixed-top">
+  <a class="navbar-brand" style="cursor: pointer" id="logo" (click)=goToHome()>
+    <img src="/assets/img/drink-machine.png" width="40" height="40" alt="Getränke Logo">
+  </a>
+  <div *ngIf="inDebugMode()">
+    DEBUG MODE
+  </div>
+  <a id="machine" (click)="goToMachine()"><img src="/assets/img/router.svg" width="35" height="35"  alt="machine-logo"></a>
+  <form class="form-inline"  id="Button-cart">
+    <a class="navbar-brand"  style="cursor: pointer" (click)=goToManager()  >
+      <img src="assets/img/manager.png" class="manager-icon"  />
+    </a>
+    <a class="navbar-brand"  style="cursor: pointer" (click)=goToCart()  >
+      <div class="cart">
+        <span class="count">{{cartCounter}}</span>
+        <i class="material-icons">.</i>
+      </div>
+      <img class="shopping_cart_icon" src ="/assets/img/cart.png" width ="40" height="40" alt="Warenkorb">
+    </a>
+  </form>
+</nav>
